@@ -10,4 +10,7 @@ RUN apt-get update \
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs
 RUN npm i -g npm pnpm yarn
 
+RUN apt-get update \
+    && apt-get install -y openjdk-8-jdk-headless openjfx
+
 USER buildagent
