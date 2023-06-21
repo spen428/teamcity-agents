@@ -11,6 +11,4 @@ RUN curl 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs \
     && npm i -g npm pnpm yarn
 
-RUN apt-get install -y lftp
-
 USER buildagent
