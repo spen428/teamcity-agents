@@ -13,11 +13,14 @@ RUN curl 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # https://github.com/JetBrains/teamcity-docker-images/blob/master/context/generated/linux/Agent/Ubuntu/20.04-sudo/Dockerfile
-# https://github.com/JetBrains/teamcity-docker-agent/blob/master/ubuntu/Dockerfile
 RUN apt-get update && \
     apt-get install -y --no-install-recommends sudo && \
     echo 'buildagent ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    apt-get clean all && \
+    rm -rf /var/lib/apt/lists/*
+
+# https://github.com/JetBrains/teamcity-docker-agent/blob/master/ubuntu/Dockerfile
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
     \
     apt-cache policy docker-ce && \
