@@ -1,4 +1,4 @@
-FROM jetbrains/teamcity-agent:2023.11 AS base
+FROM jetbrains/teamcity-agent:2023.11.1-linux-sudo AS base
 USER root
 
 RUN curl 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' --output /tmp/chrome.deb \
