@@ -1,4 +1,4 @@
-FROM jetbrains/teamcity-agent:2023.11.1-linux-sudo AS base
+FROM jetbrains/teamcity-agent:2023.11.2-linux-sudo AS base
 USER root
 
 RUN curl 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' --output /tmp/chrome.deb \
@@ -16,5 +16,10 @@ RUN apt-get update && \
     echo 'buildagent ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
+
+RUN rm -fv "$(which docker-compose)" && \
+    DOCKER_CONFIG=/usr/local/lib/docker && \
+    curl -SL 'https://github.com/docker/compose/releases/download/v2.24.1/docker-compose-linux-x86_64' -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
 
 USER buildagent
